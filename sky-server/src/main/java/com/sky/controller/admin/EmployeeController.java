@@ -99,7 +99,7 @@ public class EmployeeController {
      * @param employeePageQueryDTO
      * @return
      */
-    @GetMapping
+    @GetMapping("page")
     @ApiOperation("员工分页查询")
     @ApiImplicitParams({})
     public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
