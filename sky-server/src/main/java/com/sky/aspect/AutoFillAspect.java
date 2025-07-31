@@ -1,6 +1,7 @@
 package com.sky.aspect;
 
 import com.sky.annotation.AutoFill;
+import com.sky.constant.AutoFillConstant;
 import com.sky.context.BaseContext;
 import com.sky.enumeration.OperationType;
 import lombok.extern.slf4j.Slf4j;
@@ -55,10 +56,10 @@ public class AutoFillAspect {
         if(operationType==OperationType.INSERT){
             //为4个公共字段赋值
             try {
-                Method setCreateTime = entity.getClass().getDeclaredMethod("setCreateTime",LocalDateTime.class);
-                Method setCreateUser = entity.getClass().getDeclaredMethod("setCreateUser", Long.class);
-                Method setUpdateTime = entity.getClass().getDeclaredMethod("setUpdateTime", LocalDateTime.class);
-                Method setUpdateUser = entity.getClass().getDeclaredMethod("setUpdateUser", Long.class);
+                Method setCreateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_TIME,LocalDateTime.class);
+                Method setCreateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER, Long.class);
+                Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
+                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);
                 //通过反射来为对象属性设值
                 setCreateTime.invoke(entity,now);
                 setCreateUser.invoke(entity,currentId);
@@ -71,10 +72,10 @@ public class AutoFillAspect {
             //为2个公共字段赋值
             try {
 
-                Method setUpdateTime = entity.getClass().getDeclaredMethod("setUpdateTime", LocalDateTime.class);
-                Method setUpdateUser = entity.getClass().getDeclaredMethod("setUpdateUser", Long.class);
+                Method setUpdateTime = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
+                Method setUpdateUser = entity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER, Long.class);
                 //通过反射来为对象属性设值
-              
+
                 setUpdateTime.invoke(entity,now);
                 setUpdateUser.invoke(entity,currentId);
             } catch (Exception e) {
