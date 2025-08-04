@@ -44,7 +44,7 @@ public class DishController {
      * @param dishPageQueryDTO
      * @return
      */
-    @GetMapping
+    @GetMapping("/page")
     @ApiOperation("菜品分页查询")
     public Result<PageResult> page(DishPageQueryDTO dishPageQueryDTO){
         log.info("菜品分页查询:{}",dishPageQueryDTO);
