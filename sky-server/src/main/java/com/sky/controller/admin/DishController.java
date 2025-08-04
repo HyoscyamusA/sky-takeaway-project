@@ -88,4 +88,14 @@ public class DishController {
         return Result.success();
     }
 
+
+
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用或禁用菜品")
+    public Result updateStatus(@PathVariable Integer status, @RequestParam Long id) {
+        log.info("修改菜品状态：status={}, id={}", status, id);
+        dishService.updateStatus(status, id);
+        return Result.success();
+    }
+
 }
