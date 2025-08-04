@@ -12,9 +12,9 @@ import java.util.List;
 public interface DishFlavorMapper {
     /**
      * 批量插入口味数据
-     * @param flavor
+     * @param flavors
      */
-    void insertBatch(List<DishFlavor> flavor);
+    void insertBatch(List<DishFlavor> flavors);
 
     /**
      * 根据菜品id来删除对应的口味数据
