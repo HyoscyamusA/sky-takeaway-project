@@ -19,4 +19,43 @@
         </where>
         order by create_time desc
     </select>
+    <insert id="insertBatch" parameterType="list">
+        insert into shopping_cart
+        (name, image, user_id, dish_id, setmeal_id, dish_flavor, number, amount, create_time)
+        values
+        <foreach collection="shoppingCartList" item="sc" separator=",">
+            (#{sc.name},#{sc.image},#{sc.userId},#{sc.dishId},#{sc.setmealId},#{sc.dishFlavor},#{sc.number},#{sc.amount},#{sc.createTime})
+        </foreach>
+    </insert>
+    <update id="update">
+        update shopping_cart set number = #{number}
+        <where>
+            <if test="dishId != null">
+                and dish_id = #{dishId}
+            </if>
+            <if test="setmealId != null">
+                and setmeal_id = #{setmealId}
+            </if>
+            <if test="dishFlavor != null">
+                and dish_flavor = #{dishFlavor}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+        </where>
+    </update>
+
+
+    <select id="getById" resultType="com.sky.entity.ShoppingCart">
+        select * from shopping_cart
+        <where>
+            <if test="dishId != null">
+                and dish_id = #{dishId}
+            </if>
+            <if test="setmealId != null">
+                and setmeal_id = #{setmealId}
+            </if>
+
+        </where>
+    </select>
 </mapper>

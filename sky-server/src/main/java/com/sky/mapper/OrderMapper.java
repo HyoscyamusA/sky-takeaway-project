@@ -1,9 +1,10 @@
 package com.sky.mapper;
 
+import com.sky.dto.OrdersPageQueryDTO;
 import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
+import com.github.pagehelper.Page;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -60,5 +61,8 @@ public interface OrderMapper {
      */
     Integer countByMap(Map map);
 
+    Page<Orders> page(OrdersPageQueryDTO ordersPageQueryDTO);
+
+    Integer statistics(Integer status);
 }
 

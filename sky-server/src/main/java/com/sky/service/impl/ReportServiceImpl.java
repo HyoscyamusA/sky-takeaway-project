@@ -6,6 +6,7 @@ import com.sky.mapper.ReportMapper;
 import com.sky.mapper.UserMapper;
 import com.sky.service.ReportService;
 import com.sky.vo.OrderReportVO;
+import com.sky.vo.SalesTop10ReportVO;
 import com.sky.vo.TurnoverReportVO;
 import com.sky.vo.UserReportVO;
 import lombok.extern.slf4j.Slf4j;
@@ -255,6 +256,28 @@ public class ReportServiceImpl implements ReportService {
         map.put("end", endTime);
         return orderMapper.countByMap(map);
     }
+
+    @Transactional
+    @Override
+    public SalesTop10ReportVO getTopTen(LocalDate begin, LocalDate end) {
+        List<String> nameList = new ArrayList<>();
+        List<String> numberList = new ArrayList<>();
+        List<SalesTop10ReportVO> topTenList = reportMapper.getTopTen();
+
+        for (SalesTop10ReportVO salesTop10ReportVO : topTenList) {
+            nameList.add(salesTop10ReportVO.getNameList());
+            numberList.add(salesTop10ReportVO.getNumberList());
+        }
+
+        String nameListStr = StringUtils.collectionToCommaDelimitedString(nameList);
+        String numberListStr = StringUtils.collectionToCommaDelimitedString(numberList);
+
+        return SalesTop10ReportVO.builder()
+                .nameList(nameListStr)
+                .numberList(numberListStr)
+                .build();
+    }
+
 
 
 }

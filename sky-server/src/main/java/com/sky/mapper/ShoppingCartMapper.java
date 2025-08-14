@@ -1,5 +1,6 @@
 package com.sky.mapper;
 
+import com.sky.dto.ShoppingCartDTO;
 import com.sky.entity.ShoppingCart;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -48,4 +49,12 @@ public interface ShoppingCartMapper {
      */
     @Delete("delete from shopping_cart where id = #{id}")
     void deleteById(Long id);
+
+    void insertBatch(List<ShoppingCart> shoppingCartList);
+
+    List<ShoppingCart> getById(ShoppingCartDTO shoppingCartDTO);
+
+    void update(ShoppingCart shoppingCart);
+
+
 }
